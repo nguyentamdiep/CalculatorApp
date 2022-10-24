@@ -5,6 +5,7 @@ CS526.N11
 group N09
 
 Run by Command:
+(For Nodejs Docker)
 
 `git clone https://github.com/nguyentamdiep/CalculatorApp.git`
 

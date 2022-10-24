@@ -2,7 +2,9 @@
 
 CS526.N11
 
-group N09
+group N09:
+
+Nguyễn Tam Điệp - MSSV: 19521360
 
 Run by Command:
 

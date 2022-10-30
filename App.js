@@ -88,10 +88,43 @@ function getHistory(A) {
   return str;
 }
 
+function search0(A, text) {
+  let t = ConvertTextToArray(text);
+  if (t.length == 0) {
+    return '';
+  }
+  let str = '';
+  let str1 = '';
+  for (let i = 0; i < t.length; i++) {
+    str += t[i];
+  }
+  for (let i = 0; i < A.length; i++) {
+    if (A[i].substring(0, str.length) == str) {
+      str1 += A[i] + '\n'+'\n';
+    }
+  }
+  return str1;
+}
 
 
 function search(A, text){
-let str1 = ''
+  if (text[0] == 's'){
+    let str1 = '';
+    A.filter(item=>{
+    for (let i =0; i<item.length;i++)
+    if (item[i] == 's'){
+      str1+=item+'\n'+'\n';
+      break;
+    } 
+    })
+    
+    
+  }
+  let str1 = search0(A, text);
+  if (str1 != ''){
+    return str1;
+  }
+str1 = '';
 A.filter(item=>{for (let i=0;i<text.length;i++){
 		let flag = 0;
 		for (let j = 0; j<item.length;j++){

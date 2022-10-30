@@ -2,7 +2,10 @@
 
 CS526.N11
 
-group N09:
+Project Cá nhân
+
+(Do lúc làm project này em chưa có nhóm nên em làm cá nhân.
+Hiện tại em dã có nhóm, nên các Project sau em sẽ làm nhóm)
 
 Nguyễn Tam Điệp - MSSV: 19521360
 

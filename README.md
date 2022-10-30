@@ -6,7 +6,7 @@ group N09:
 
 Nguyễn Tam Điệp - MSSV: 19521360
 
-Run by Command:
+For Docker
 
 `git clone https://github.com/nguyentamdiep/CalculatorApp.git`
 
@@ -21,3 +21,12 @@ Run by Command:
 `yarn start`
 
 
+For Windows with installed Node.js:
+
+`git clone https://github.com/nguyentamdiep/CalculatorApp.git`
+
+`cd CalculatorApp`
+
+`npm install @react-navigation/native @react-navigation/native-stack`
+
+`npm install react-native-screens react-native-safe-area-context`

@@ -89,25 +89,7 @@ function getHistory(A) {
 }
 
 
-/*
-function search(A, text) {
-  let t = ConvertTextToArray(text);
-  if (t.length == 0) {
-    return '';
-  }
-  let str = '';
-  let str1 = '';
-  for (let i = 0; i < t.length; i++) {
-    str += t[i];
-  }
-  for (let i = 0; i < A.length; i++) {
-    if (A[i].substring(0, str.length) == str) {
-      str1 += A[i] + '\n'+'\n';
-    }
-  }
-  return str1;
-}
-*/
+
 function search(A, text){
 let str1 = ''
 A.filter(item=>{for (let i=0;i<text.length;i++){
@@ -190,23 +172,7 @@ const HistoryScreen = ({ navigation }) => {
 
 }
 
-const SeachScreen = (navigation) => {
-  const [text_input, setTextInput] = useState('');
-  return (
-    <ScrollView style={{ padding: 25 }}>
-      <Text style={{fontSize:15}}>Nhập biểu thức bạn muốn tìm kiếm</Text>
-      <TextInput
-        style={{ height: 40, borderColor: 'black', borderWidth: 1, fontSize:20 }}
-        onChangeText={(newText) => { setTextInput(newText) }}
-        defaultValue={text_input}
-        onSubmitEditing={() => { }}
-      />
-      <Text style={{ fontSize: 20 }}>
-        {search(A, text_input)}
-      </Text>
-    </ScrollView>
-  )
-}
+
 const App = () => {
 
   return (
@@ -214,7 +180,7 @@ const App = () => {
       <Stack.Navigator>
         <Stack.Screen name='Calculator' component={CalculatorScreen} option={{ title: 'Calculator' }} />
         <Stack.Screen name='History' component={HistoryScreen} option={{ title: 'History' }} />
-        <Stack.Screen name='Search' component={SeachScreen} option={{ title: 'Screen' }} />
+        
       </Stack.Navigator>
     </NavigationContainer>
   )

@@ -88,6 +88,8 @@ function getHistory(A) {
   return str;
 }
 
+
+/*
 function search(A, text) {
   let t = ConvertTextToArray(text);
   if (t.length == 0) {
@@ -105,6 +107,20 @@ function search(A, text) {
   }
   return str1;
 }
+*/
+function search(A, text){
+let str1 = ''
+A.filter(item=>{for (let i=0;i<text.length;i++){
+		let flag = 0;
+		for (let j = 0; j<item.length;j++){
+			if (item[j]==text[i]){flag++;}
+		}
+		if (flag>0){str1+=item+'\n'+'\n';break;}
+		}
+	})
+return str1;
+}
+
 const CalculatorScreen = ({ navigation }) => {
   let c = ['+', '-', '*', '/', '(', ')', 'sqrt'];
 
@@ -159,14 +175,16 @@ const CalculatorScreen = ({ navigation }) => {
 }
 
 const HistoryScreen = ({ navigation }) => {
+	const [text_ans, setTextAns] = useState(getHistory(A));
   return (
     <ScrollView style={{ padding: 25 }}>
-      <Button
-        title='Search'
-        onPress={() => { navigation.navigate('Search') }}
-      />
+     <Text style={{frontSize:20}}>Nhap bieu thuc ban muon tim kiem</Text>
+     <TextInput
+	style={{height:40, borderColor:'black', borderWidth:1, fontSize:20}}
+	onChangeText={ (newtext)=>{ if (newtext==''){setTextAns(getHistory(A))} else{setTextAns(search(A,newtext))} } }
+	/>
 
-      <Text style={{ fontSize: 20 }}>{getHistory(A)}</Text>
+	<Text style={{fontSize:20}}>{text_ans}</Text>
     </ScrollView>
   )
 

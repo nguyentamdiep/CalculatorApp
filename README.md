@@ -21,6 +21,7 @@ For Docker
 `yarn start`
 
 
+==================================
 For Windows with installed Node.js:
 
 `git clone https://github.com/nguyentamdiep/CalculatorApp.git`

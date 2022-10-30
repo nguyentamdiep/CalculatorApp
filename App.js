@@ -178,7 +178,7 @@ const HistoryScreen = ({ navigation }) => {
 	const [text_ans, setTextAns] = useState(getHistory(A));
   return (
     <ScrollView style={{ padding: 25 }}>
-     <Text style={{frontSize:20}}>Nhap bieu thuc ban muon tim kiem</Text>
+     <Text style={{frontSize:20}}>Nhập biểu thức bạn muốn tìm kiếm</Text>
      <TextInput
 	style={{height:40, borderColor:'black', borderWidth:1, fontSize:20}}
 	onChangeText={ (newtext)=>{ if (newtext==''){setTextAns(getHistory(A))} else{setTextAns(search(A,newtext))} } }

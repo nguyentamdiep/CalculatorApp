@@ -4,7 +4,7 @@ CS526.N11
 
 Nguyễn Tam Điệp - MSSV: 19521360
 
-For Docker
+with yarn:
 
 `git clone https://github.com/nguyentamdiep/CalculatorApp.git`
 
@@ -21,7 +21,7 @@ For Docker
 
 ==================================
 
-For Windows with installed Node.js:
+with npm :
 
 `git clone https://github.com/nguyentamdiep/CalculatorApp.git`
 

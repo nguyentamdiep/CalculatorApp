@@ -183,7 +183,7 @@ const CalculatorScreen = ({ navigation }) => {
         keyboardType='numeric'
         onChangeText={(newText) => { setTextInput(newText); setAnswer('') }}
         defaultValue={text_input}
-        onSubmitEditing={() => { setAnswer(calculator(A, text_input)), storeData(A), console.log(A) }}
+        onSubmitEditing={() => { setAnswer(calculator(A, text_input)), storeData(A) }}
       />
 
       <View style={styles.row} >

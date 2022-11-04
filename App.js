@@ -2,10 +2,43 @@ import React, { useState } from 'react';
 import { View, Text, Button, TextInput, ScrollView, TouchableOpacity, StyleSheet } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
+async function storeData(value) {
+  try {
+    const jsonValue = JSON.stringify(value);
+    await AsyncStorage.setItem('@storage_Key8', jsonValue);
+    console.log('luu thanh cong');
+  } catch {
+    // saving error
+    console.log('luu that bai');
+  }
+};
+
+
+async function getData(arr) {
+  try {
+    const value = await AsyncStorage.getItem('@storage_Key8')
+    if (value !== null) {
+      k =JSON.parse(value);
+      if (arr.length == 0) {
+        for (var i = 0; i < k.length; i++)
+          arr.push(k[i]);
+      }
+    }
+
+
+    console.log('read data thanh cong');
+    // jsonValue != null ? JSON.parse(jsonValue) : 
+  } catch {
+    // error reading value
+    console.log('read data that bai');
+
+  }
+}
 const Stack = createNativeStackNavigator();
 let A = [];
-
+getData(A);
 function isEvalable(text) {
   try {
     eval(text);
@@ -67,7 +100,7 @@ function calculator(A, text) {
   if (isEvalable(str_calculate)) {
     let evaled_str_calculate = eval(str_calculate);
     if (isNumber(evaled_str_calculate)) {
-      A.push(str_store + '\n'+ '=' + evaled_str_calculate);
+      A.push(str_store + '\n' + '=' + evaled_str_calculate);
       return evaled_str_calculate;
     }
     else {
@@ -100,40 +133,41 @@ function search0(A, text) {
   }
   for (let i = 0; i < A.length; i++) {
     if (A[i].substring(0, str.length) == str) {
-      str1 += A[i] + '\n'+'\n';
+      str1 += A[i] + '\n' + '\n';
     }
   }
   return str1;
 }
 
 
-function search(A, text){
-  if (text[0] == 's'){
+function search(A, text) {
+  if (text[0] == 's') {
     let str1 = '';
-    A.filter(item=>{
-    for (let i =0; i<item.length;i++)
-    if (item[i] == 's'){
-      str1+=item+'\n'+'\n';
-      break;
-    } 
+    A.filter(item => {
+      for (let i = 0; i < item.length; i++)
+        if (item[i] == 's') {
+          str1 += item + '\n' + '\n';
+          break;
+        }
     })
-    
-    
+
+
   }
   let str1 = search0(A, text);
-  if (str1 != ''){
+  if (str1 != '') {
     return str1;
   }
-str1 = '';
-A.filter(item=>{for (let i=0;i<text.length;i++){
-		let flag = 0;
-		for (let j = 0; j<item.length;j++){
-			if (item[j]==text[i]){flag++;}
-		}
-		if (flag>0){str1+=item+'\n'+'\n';break;}
-		}
-	})
-return str1;
+  str1 = '';
+  A.filter(item => {
+    for (let i = 0; i < text.length; i++) {
+      let flag = 0;
+      for (let j = 0; j < item.length; j++) {
+        if (item[j] == text[i]) { flag++; }
+      }
+      if (flag > 0) { str1 += item + '\n' + '\n'; break; }
+    }
+  })
+  return str1;
 }
 
 const CalculatorScreen = ({ navigation }) => {
@@ -149,7 +183,7 @@ const CalculatorScreen = ({ navigation }) => {
         keyboardType='numeric'
         onChangeText={(newText) => { setTextInput(newText); setAnswer('') }}
         defaultValue={text_input}
-        onSubmitEditing={() => setAnswer(calculator(A, text_input))}
+        onSubmitEditing={() => { setAnswer(calculator(A, text_input)), storeData(A), console.log(A) }}
       />
 
       <View style={styles.row} >
@@ -190,16 +224,19 @@ const CalculatorScreen = ({ navigation }) => {
 }
 
 const HistoryScreen = ({ navigation }) => {
-	const [text_ans, setTextAns] = useState(getHistory(A));
+ // getData(A);
+ // console.log(A);
+  const [text_ans, setTextAns] = useState(getHistory(A));
+
   return (
     <ScrollView style={{ padding: 25 }}>
-     <Text style={{frontSize:20}}>Nhập biểu thức bạn muốn tìm kiếm</Text>
-     <TextInput
-	style={{height:40, borderColor:'black', borderWidth:1, fontSize:20}}
-	onChangeText={ (newtext)=>{ if (newtext==''){setTextAns(getHistory(A))} else{setTextAns(search(A,newtext))} } }
-	/>
+      <Text style={{ frontSize: 20 }}>Nhập biểu thức bạn muốn tìm kiếm</Text>
+      <TextInput
+        style={{ height: 40, borderColor: 'black', borderWidth: 1, fontSize: 20 }}
+        onChangeText={(newtext) => { if (newtext == '') { setTextAns(getHistory(A)) } else { setTextAns(search(A, newtext)) } }}
+      />
 
-	<Text style={{fontSize:20}}>{text_ans}</Text>
+      <Text style={{ fontSize: 20 }}>{text_ans}</Text>
     </ScrollView>
   )
 
@@ -213,7 +250,7 @@ const App = () => {
       <Stack.Navigator>
         <Stack.Screen name='Calculator' component={CalculatorScreen} option={{ title: 'Calculator' }} />
         <Stack.Screen name='History' component={HistoryScreen} option={{ title: 'History' }} />
-        
+
       </Stack.Navigator>
     </NavigationContainer>
   )
@@ -221,7 +258,7 @@ const App = () => {
 
 const styles = StyleSheet.create({
   row: {
-    padding:10,
+    padding: 10,
     flexDirection: "row",
     flexWrap: "wrap",
   },
